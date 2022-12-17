@@ -1,2 +1,3 @@
 # Group27-Fitness_Platform
-Github link:  
+Github link: https://github.com/DarshanLNM/Group27-Fitness_Platform
+
