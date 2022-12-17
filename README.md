@@ -20,19 +20,19 @@ Project Implementation:
 
 •	After downloading the project file, install all the dependencies required by running the command   
 
-npm i
+       npm i
 
 •	Populate the database using the seed file provided. Run the following command 
 
-npm run seed
+       npm run seed
 
 •	Run command 
 
-node app.js
+       node app.js
 
 •	Browse through the platform for workouts
 
-•	Register to create account to create your own post and also to interact with other posts
+•	Register to create an account for creating your own post and also to interact with other posts.
 
 •	Admin account provided can be used to view admin controls.
 
