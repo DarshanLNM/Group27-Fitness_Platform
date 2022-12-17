@@ -1,11 +1,15 @@
 Fitness Platform: Redefining Fitness at Home
+
 Github link: https://github.com/DarshanLNM/Group27-Fitness_Platform
 
 Group 27: Team Members
 
 •	Darshan Lakshmi Narasimha Murthy
+
 •	Sharon Mary Charles
+
 •	Priyanka Ajitsinh Zala
+
 •	Vinay Sakhamuri
 
 About: Fitness Platform
@@ -15,12 +19,16 @@ An at home fitness platform which spans over various types of fitness like Yoga,
 Project Implementation:
 
 •	After downloading the project file, install all the dependencies required by running the command   
+
 npm i
 
 •	Populate the database using the seed file provided. Run the following command 
+
 npm run seed
 
-•	Run command node app.js
+•	Run command 
+
+node app.js
 
 •	Browse through the platform for workouts
 
@@ -29,5 +37,6 @@ npm run seed
 •	Admin account provided can be used to view admin controls.
 
 Username: darshan@gmail.com
+
 Password: darshan
 
