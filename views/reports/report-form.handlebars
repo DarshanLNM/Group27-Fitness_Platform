@@ -1,0 +1,62 @@
+<body>
+    
+    <p class="reportHead" id={{postId}}>Reporting Post : <a href='http://localhost:3000/posts/postInfo/{{postId}}' class="reported">{{reported-post}}</a></p>
+
+    <div class="reportReasons"> 
+
+    <br/>
+    <h4 id="Whyreport">Please Select the Reason for Reporting this Post</h4>
+    <br/>
+
+        <form action="/reports/form" method="post" id="reason">
+            <p>
+                <label class="checkbox-inline">
+                    <input type="checkbox" id="reason1" name="reason" value="Hate Speech or Symbols">
+                    <label class="reportTips" for="reason1">Hate Speech or Symbols</label><br>
+                </label>
+            </p>
+
+            <p>
+                <label class="checkbox-inline">
+                    <input type="checkbox" id="reason2" name="reason" value="Bullying or Harassment">
+                    <label class="reportTips" for="reason2">Bullying or Harassment</label><br>
+                </label>
+            </p>
+
+            <p>
+                <label class="checkbox-inline">
+                    <input type="checkbox" id="reason3" name="reason" value="Spam or Fraud">
+                    <label class="reportTips" for="reason3">Spam or Fraud</label><br>
+                </label>
+            </p>
+
+            <p>
+                <label class="checkbox-inline">
+                    <input type="checkbox" id="reason4" name="reason" value="Something else">
+                    <label class="reportTips" for="reason4">Something Else</label><br>
+                </label>
+
+                <input hidden="hidden" name="postId" value={{postId}}>
+            </p>
+
+            {{#unless status}}
+                <p class="wrongMsg">{{message}}</p>
+            {{/unless}}
+
+            {{#unless status}}
+                <p class="rightMsg">{{success}}</p>
+            {{/unless}}
+
+            <br/>
+
+            <input id="reportSubmit" type="submit" value="Submit Report" class="reportSubmit button btn">
+
+        </form>
+
+    <br/>
+
+    <a id="goBack" href="/homePage"> <span class="glyphicon glyphicon-arrow-left"> </span> Back </a>
+
+    </div>
+
+</body>

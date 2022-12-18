@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Redefining Fitness at Home</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../public/css/style.css"> 
+
+</head>
+
+<body>
+
+    <div class="bg-color">
+
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header"> 
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div> 
+                
+                <label class = "fitnessPlatform"> <a href="http://localhost:3000/homePage"> F I T N E S S  P L A T F O R M </a></label>
+                
+                <div role="navigation" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                    <form class="navbar-form navbar-right"> 
+
+                        <div class="form-group">
+                            <input id="searchContent" type="text" class="form-control" placeholder=" Enter Search Words Here">
+                        </div>
+
+                        <a id="searchButton" href="http://localhost:3000/homePage" class="btn">Go</a>
+
+                    </form>
+
+                    <ul class="nav navbar-nav">
+
+                        <li class="categories">
+                            <a href="http://localhost:3000/homePage/tag?searchTag=Yoga">Yoga</a>
+                        </li>
+                        <li class="categories">
+                            <a href="http://localhost:3000/homePage/tag?searchTag=HIIT">HIIT</a>
+                        </li>
+                        <li class="categories">
+                            <a href="http://localhost:3000/homePage/tag?searchTag=Pilates">Pilates</a>
+                        </li>
+                        <li class="categories">
+                            <a href="http://localhost:3000/homePage/tag?searchTag=Weights">Weights</a>
+                        </li>
+                        <li class="categories">
+                            <a href="bmiCalculator/bmicalculator">BMI Calculator</a>
+                        </li>
+
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right"> 
+                        {{#if userLogin}}
+                        <li>
+                            <span>
+                                <a href="/users/account"> <span id="userNAME">Welcome Back! Account : {{userLogin.nickname}}</a></span>&nbsp;&nbsp; 
+                            </span>
+                        </li>
+
+                        <li>
+                            <button type="button" onclick = "window.location.href='/users/signout'" class="btn AllButton navbar-btn">Log Out</button>
+                        </li>
+                        {{else}}
+                        <li>
+                            <button type="button" onclick = "window.location.href='/users/signin'" class="btn btn-default navbar-btn">Login</button>
+                        </li>
+
+                        <li>
+                            <button type="button" onclick = "window.location.href='/users/signup'" class="btn AllButton navbar-btn">Register</button>
+                        </li>
+                        {{/if}}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div>
+            {{{body}}}
+        </div>
+
+        <hr/>
+
+    </div>
+
+    <div class="footer">
+        <p>
+            <p class="footerButton">Darshan Lakshmi Narasimha Murthy - Sharon Mary Charles - Priyanka Ajitsinh Zala - Vinay Sakhamuri</p>
+            <p>
+                CS 546 Group 27 Final Project
+            </p>
+        </p>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-balloon-heart" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="m8 2.42-.717-.737c-1.13-1.161-3.243-.777-4.01.72-.35.685-.451 1.707.236 3.062C4.16 6.753 5.52 8.32 8 10.042c2.479-1.723 3.839-3.29 4.491-4.577.687-1.355.587-2.377.236-3.061-.767-1.498-2.88-1.882-4.01-.721L8 2.42Zm-.49 8.5c-10.78-7.44-3-13.155.359-10.063.045.041.089.084.132.129.043-.045.087-.088.132-.129 3.36-3.092 11.137 2.624.357 10.063l.235.468a.25.25 0 1 1-.448.224l-.008-.017c.008.11.02.202.037.29.054.27.161.488.419 1.003.288.578.235 1.15.076 1.629-.157.469-.422.867-.588 1.115l-.004.007a.25.25 0 1 1-.416-.278c.168-.252.4-.6.533-1.003.133-.396.163-.824-.049-1.246l-.013-.028c-.24-.48-.38-.758-.448-1.102a3.177 3.177 0 0 1-.052-.45l-.04.08a.25.25 0 1 1-.447-.224l.235-.468ZM6.013 2.06c-.649-.18-1.483.083-1.85.798-.131.258-.245.689-.08 1.335.063.244.414.198.487-.043.21-.697.627-1.447 1.359-1.692.217-.073.304-.337.084-.398Z"/>
+    </svg>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>  
+
+    <script type="text/javascript">
+        
+        $('#to-top').click(function () 
+        {
+            $page = $('html, body')
+
+            var distance = $('html').scrollTop() + $('body').scrollTop()
+            var time = 250;
+            var interval = 25;
+            var itemDistance = distance/(time/interval);
+
+            var intervalId = setInterval(function () 
+            {
+                distance = distance - itemDistance;
+
+                if(distance <= 0)
+                {
+                    distance = 0;
+                    clearInterval(intervalId);
+                }
+
+                $page.scrollTop(distance);
+
+            }, interval)
+        })
+
+        $('#searchButton').click(function () 
+        {
+            let typeIn = $('#searchContent').val();
+            var url;
+
+            if(typeIn)
+            {
+                url = `http://localhost:3000/homePage/search?searchString=${typeIn}`;
+            }
+            else 
+            {
+                url = "http://localhost:3000/homePage";
+            }
+            
+            $('#searchButton').prop('href', url)
+        })
+    </script>
+
+</body>
+
+</html>
