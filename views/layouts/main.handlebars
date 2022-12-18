@@ -2,11 +2,9 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>Redefining Fitness at Home</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -14,12 +12,12 @@
 
 </head>
 
-<body>
+    <body>
 
     <div class="bg-color">
-
         <nav class="navbar navbar-default">
             <div class="container">
+                
                 <div class="navbar-header"> 
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span>
@@ -28,13 +26,12 @@
                         <span class="icon-bar"></span>
                     </button>
                 </div> 
-                
+
                 <label class = "fitnessPlatform"> <a href="http://localhost:3000/homePage"> F I T N E S S  P L A T F O R M </a></label>
                 
                 <div role="navigation" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                     <form class="navbar-form navbar-right"> 
-
                         <div class="form-group">
                             <input id="searchContent" type="text" class="form-control" placeholder=" Enter Search Words Here">
                         </div>
@@ -44,7 +41,6 @@
                     </form>
 
                     <ul class="nav navbar-nav">
-
                         <li class="categories">
                             <a href="http://localhost:3000/homePage/tag?searchTag=Yoga">Yoga</a>
                         </li>
@@ -60,40 +56,34 @@
                         <li class="categories">
                             <a href="bmiCalculator/bmicalculator">BMI Calculator</a>
                         </li>
-
                     </ul>
-
                     <ul class="nav navbar-nav navbar-right"> 
                         {{#if userLogin}}
-                        <li>
+                            <li>
                             <span>
                                 <a href="/users/account"> <span id="userNAME">Welcome Back! Account : {{userLogin.nickname}}</a></span>&nbsp;&nbsp; 
                             </span>
-                        </li>
-
-                        <li>
+                            </li>
+                            <li>
                             <button type="button" onclick = "window.location.href='/users/signout'" class="btn AllButton navbar-btn">Log Out</button>
-                        </li>
+                            </li>
                         {{else}}
-                        <li>
+                            <li>
                             <button type="button" onclick = "window.location.href='/users/signin'" class="btn btn-default navbar-btn">Login</button>
-                        </li>
+                            </li>
 
-                        <li>
+                            <li>
                             <button type="button" onclick = "window.location.href='/users/signup'" class="btn AllButton navbar-btn">Register</button>
-                        </li>
+                            </li>
                         {{/if}}
                     </ul>
                 </div>
             </div>
         </nav>
-
         <div>
             {{{body}}}
         </div>
-
         <hr/>
-
     </div>
 
     <div class="footer">
@@ -118,30 +108,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>  
 
     <script type="text/javascript">
-        
-        $('#to-top').click(function () 
-        {
-            $page = $('html, body')
-
-            var distance = $('html').scrollTop() + $('body').scrollTop()
-            var time = 250;
-            var interval = 25;
-            var itemDistance = distance/(time/interval);
-
-            var intervalId = setInterval(function () 
-            {
-                distance = distance - itemDistance;
-
-                if(distance <= 0)
-                {
-                    distance = 0;
-                    clearInterval(intervalId);
-                }
-
-                $page.scrollTop(distance);
-
-            }, interval)
-        })
 
         $('#searchButton').click(function () 
         {
@@ -160,7 +126,5 @@
             $('#searchButton').prop('href', url)
         })
     </script>
-
-</body>
-
+    </body>
 </html>
