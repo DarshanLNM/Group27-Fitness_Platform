@@ -1,0 +1,57 @@
+<body>
+<br/>
+<div class="container-fluid">
+    
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a style="color: #1e0044;font-size: large" href="#users" aria-controls="users" role="tab" data-toggle="tab">List of Users </a></li>
+        <li> | </li>
+        <li role="presentation"><a style="color: #1e0044;font-size: large" href="#posts" aria-controls="posts" role="tab" data-toggle="tab"> List of Posts</a></li>
+    </ul>
+
+    <div class="container-fluid">
+        <br/>
+        <div class="tab-content">
+           
+            <div style="padding-left: 30px" role="tabpanel" class="tab-pane active" id="users">
+                {{#each allUsers}}
+                    <div class="row">
+                        <p style="font-size: 20px">Username - <span style="color: #1e0044">{{this.username}}</span></p> 
+                        <p> </p>
+                        <p style="font-size: 20px">Display Name - {{this.nickname}}</p>
+                        <p> </p>
+                        <p style="font-size: 20px">PostId List -
+                        <ul>
+                            {{#each this.posts}}
+                                <li style="font-size: 20px"><p class="PostIdList">{{this}}</p></li> 
+                            {{/each}}
+                        </ul>
+                    </div>
+                    <br>
+                {{/each}}
+            </div>
+            
+            <div role="tabpanel" class="tab-pane" id="posts">
+                {{#each allPosts}}
+                    <div class="media post-part">
+                        <div class="media-left ">
+                            <div class="photoContainer">
+                                <a href='http://localhost:3000/posts/postInfo/{{this._id}}'>
+                                    <img class="media-object user-Pic" src={{this.photoArr.[0]}} alt="UserPic" />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading postTopic"><a class="jumpToPost" id={{this._id}} href='http://localhost:3000/posts/postInfo/{{this._id}}'>{{this.topic}}</a></h4>
+                            <p class="AllContent">{{this.content}}</p>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <h3 style="text-align: center"><a class="BACK" href='http://localhost:3000/homePage'>Go Back</a></h3>
+    </div>
+</div>
+</body>
