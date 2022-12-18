@@ -4,7 +4,7 @@
 <body>
 <div class="container">
     <main class="container">
-        
+
         <div class="rowImg">
             <a href="https://www.amazon.com/Gaiam-Yoga-Mat-Exercise-Exercises/dp/B00FLID5EO?&linkCode=ll1&tag=fitness-home-gym-equipment-20&linkId=76a01810087a038fc9687353d5180d18&language=en_US&ref_=as_li_ss_tl&ascsubtag=d62c12dd-cdd8-422c-aeb0-b7cc0bdfa03b&correlationId=d62c12dd-cdd8-422c-aeb0-b7cc0bdfa03b" target="_blank"> <img src="/public/images/ad.jpg" alt="Pilates" style="width:180%"> </a>
         </div>
@@ -23,19 +23,19 @@
         <br/>
 
         {{#if userLogin}}
-            <div> 
+            <div>
             <form id="static-form" method="post" action="http://localhost:3000/homePage/createPost" enctype="multipart/form-data">
-                
-                    <h4 id="Guide">New Post</h4>
-                    
-                    <div> 
+
+                    <h4 id="makePost">New Post</h4>
+
+                    <div>
                         <input name="topic" type="text" id="topicId" class="form-control" placeholder="Topic" value="" aria-describedby="basic-addon1">
                     </div>
-                    
-                    <div> 
+
+                    <div>
                         <br/>
 
-                        <p class ="labelTag">Select Tags for the Post</p> 
+                        <p class ="labelTag">Select Tags for the Post</p>
                         <p>
                             <p class="checkbox-inline">
                                 <input name="tag" type="checkbox" id="check1" value="Yoga">
@@ -57,17 +57,17 @@
                                 <label class="check4">Weights</label>
                             </p>&nbsp;
                         </p>
-                       
+
                     </div>
 
-                    <div> 
+                    <div>
                         <label class ="labelTag">Description</label>
-                        <textarea name="content" class="form-control" id="contentId" cols="20" rows="4" placeholder="Description for Post"></textarea> 
+                        <textarea name="content" class="form-control" id="contentId" cols="20" rows="4" placeholder="Description for Post"></textarea>
                     </div>
 
                 <br/>
 
-                <div>   
+                <div>
                     <input id="addNewPostButton" name="submit" type="button" class="btn AllButton" value="Submit" data-toggle="button" aria-pressed="false" > <!--autocomplete="off"-->
                 </div>
 
@@ -80,11 +80,11 @@
                 <br/>
 
             </form>
-               
+
         {{else}}
-        
-           <h3 class="popUp">Are you wanting to make posts of your own or leave a like, comment or maybe report a post? We would suggest you to register or login to our website! </h3> 
-        
+
+           <h3 class="popUp">Are you wanting to make posts of your own or leave a like, comment or maybe report a post? We would suggest you to register or login to our website! </h3>
+
         {{/if}}
 
         <br/>
@@ -101,7 +101,7 @@
                             <a href='http://localhost:3000/posts/postInfo/{{this._id}}'>
                                 <img class="media-object user-Pic" src={{this.photoArr.[0]}} alt="defaultAlt" />
                             </a>
-                            
+
                         <div>
                             <h4 class="media-heading postTopic"><a class="jumpToPost" id={{this._id}} href="#">{{this.topic}}</a></h4>
                             <div> <p class="AllContent">{{this.content}}</p> </div>
@@ -113,7 +113,7 @@
                             <h1 class="noPost">No Posts yet</h1>
                         </div>
                 {{/each}}
-            
+
         </div>
     </main>
 </div>
@@ -127,13 +127,13 @@
     {
         var submittedInfo = new FormData(getDataforNewPost);
     }
-    
-    $('#addNewPostButton').click(function () 
+
+    $('#addNewPostButton').click(function ()
     {
         var httpReq = new XMLHttpRequest();
         var tagArr = [];
 
-        $('input[type="checkbox"]:checked').each(function (index) 
+        $('input[type="checkbox"]:checked').each(function (index)
         {
             tagArr[index] = $(this).val();
         })
@@ -149,14 +149,14 @@
         httpReq.open('post', 'http://localhost:3000/homePage/createPost');
         httpReq.send(submittedInfo);
 
-        httpReq.onload = function () 
+        httpReq.onload = function ()
         {
             console.log(httpReq.responseText);
             var Timeout = setTimeout(function () { window.location.reload(); }, 500);
         }
     })
 
-    $('.jumpToPost').click(function () 
+    $('.jumpToPost').click(function ()
     {
         let urlLink = `http://localhost:3000/posts/postInfo/${$(this).attr("id")}`;
         let thisID = $(this).attr("id");
@@ -164,7 +164,7 @@
 
         $(selectorID).attr('href', urlLink);
     })
-    
+
 </script>
 </body>
 </html>
