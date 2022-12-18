@@ -7,8 +7,6 @@ function BMICalculator(height, weight)
             throw `Error : Input can only be Numeric`;
         }
 
-        //For InputHeight Error Checking
-
         for(i=0; i<height.length; i++)
         {
             if((height.charCodeAt(i)<46) || (height.charCodeAt(i)===47) || (height.charCodeAt(i)<46))
@@ -31,8 +29,6 @@ function BMICalculator(height, weight)
                 throw `Error : Input can only be Numeric`;
             }
         }
-
-        //For InputWeight Error Checking
 
         for(i=0; i<weight.length; i++)
         {
