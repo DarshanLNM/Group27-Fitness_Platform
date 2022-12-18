@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+  
+<div>
+    <h1 style="text-align: center; color: #1e0044">Manage all the Reports Submitted Here</h1>
+    <br/>
+</div>
+
+<div>
+  
+    {{#each reportList}}
+        <ul>
+            <li class="reportList">ReportId - <span>{{this._id}}</span></li>
+            <li class="reportList">UserId - {{this.userId}}</li>
+            <li class="reportList">PostId - <span>{{this.postId}}</span></a></li> 
+            <li class="reportList">Report Reasons - {{this.reasons}}</li>
+
+            <br/>
+
+            <div style="text-align: center">
+                <button class="deleteBtn btn btn-danger" style = "background-color: #1e0044">Delete Report</button>
+                <button class="deleteBtnSuper btn AllButton">Delete Post</button>
+            </div>
+        </ul>
+    {{/each}}
+    
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+</div>
+
+<div>
+    <h3 style="text-align: center"><a class="BACK" href='http://localhost:3000/homePage'>Go Back</a></h3>
+</div>
+
+</body>
+
+</html>
+
+<script>
+
+    let delButton = document.getElementsByClassName("deleteBtn");
+
+    for (let i = 0; i < delButton.length; i++) 
+    {
+        delButton[i].onclick =function() 
+        {
+            let dad = this.parentNode;
+            let grandfather=dad.parentNode;
+            let sonli = grandfather.getElementsByTagName("li");
+            let sonspan=sonli[0].getElementsByTagName("span");
+            let reportId=sonspan[0].innerText
+
+            var httpReq = new XMLHttpRequest();
+            httpReq.open('post', 'http://localhost:3000/posts/removeReport');
+            httpReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+            httpReq.send('reportId='+reportId);
+
+            httpReq.onload = function () 
+            {
+                window.location.reload();
+            }
+        }
+    }
+
+    let delButtonParent = document.getElementsByClassName("deleteBtnSuper");
+
+    for (let i = 0; i < delButtonParent.length; i++) 
+    {
+        delButtonParent[i].onclick =function() 
+        {
+            let dad = this.parentNode;
+            let grandfather=dad.parentNode;
+            let sonli = grandfather.getElementsByTagName("li");
+            let sonspan=sonli[0].getElementsByTagName("span");
+            let reportId=sonspan[0].innerText;
+            let sonspan2=sonli[2].getElementsByTagName("span");
+            let postId=sonspan2[0].innerText;
+
+            var httpReq = new XMLHttpRequest();
+
+            httpReq.open('post', 'http://localhost:3000/posts/removeReportAndPost');
+            httpReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+            httpReq.send('reportId='+reportId+'&postId='+postId);
+
+            httpReq.onload = function () 
+            {
+                window.location.reload();
+            }
+        }
+    }
+
+</script>

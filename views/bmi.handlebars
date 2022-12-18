@@ -1,0 +1,54 @@
+<body>
+    <form id="bmi-form" method="post" action="/bmiCalculator/bmicalculator">
+
+        <label for="inputHeight">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enter Height :</label>
+        <input type="text" id="inputHeight" name="inputHeight" placeholder="Enter Height in meters" required>
+
+        <label for="inputWeight">Enter Weight :</label>
+        <input type="text" id="inputWeight" name="inputWeight" placeholder="Enter Weight in kg" required>
+
+        <button class="bmiButton">Submit</button>
+
+        <br>
+        <br>
+        
+        <p class="bmiDescription">Body Mass Index (BMI) is a person’s weight in kilograms divided by the square of height in meters. 
+           A high BMI can indicate high body fatness. 
+           BMI screens for weight categories that may lead to health problems, but it does not diagnose the body fatness or health of an individual.</p>
+
+        <div>
+            <img src="/public/images/bmiChart.jpg" alt="bmiChart" class="bmiChart" />
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        {{#if bmiComputed}}
+        
+        <div>
+            <p class="bmiResults" style="background-color:#1e0044;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BMI : {{bmiComputed}}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Weight Status : {{bmiResult}}</p>
+        </div>
+
+        {{else}}
+
+        <div>
+            <p class="bmiResults" style="background-color:#ff0000;"> {{Error}}</p>
+        </div>
+
+        {{/if}}
+    </form>
+</body>
