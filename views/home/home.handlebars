@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+<div class="container">
+    <main class="container">
+        
+        <div class="rowImg">
+            <a href="https://www.amazon.com/Gaiam-Yoga-Mat-Exercise-Exercises/dp/B00FLID5EO?&linkCode=ll1&tag=fitness-home-gym-equipment-20&linkId=76a01810087a038fc9687353d5180d18&language=en_US&ref_=as_li_ss_tl&ascsubtag=d62c12dd-cdd8-422c-aeb0-b7cc0bdfa03b&correlationId=d62c12dd-cdd8-422c-aeb0-b7cc0bdfa03b" target="_blank"> <img src="/public/images/ad.jpg" alt="Pilates" style="width:180%"> </a>
+        </div>
+
+        <br/>
+        <br/>
+
+        <div class="intro" style="margin-left: 30px">
+            <p>Welcome to Fitness Platfrom! <br> A safe space to focus on your fitness journey and build a community right from where you live!<br> Here there is no worry about social distancing or waiting to get an equipment. <hr class="hr1"> Go ahead and follow along the workouts!</p>
+        </div>
+
+        <br/>
+        <br/>
+        <br/>
+        <hr>
+        <br/>
+
+        {{#if userLogin}}
+            <div> 
+            <form id="static-form" method="post" action="http://localhost:3000/homePage/createPost" enctype="multipart/form-data">
+                
+                    <h4 id="Guide">New Post</h4>
+                    
+                    <div> 
+                        <input name="topic" type="text" id="topicId" class="form-control" placeholder="Topic" value="" aria-describedby="basic-addon1">
+                    </div>
+                    
+                    <div> 
+                        <br/>
+
+                        <p class ="labelTag">Select Tags for the Post</p> 
+                        <p>
+                            <p class="checkbox-inline">
+                                <input name="tag" type="checkbox" id="check1" value="Yoga">
+                                <label class="check1">Yoga</label>
+                            </p>&nbsp;
+
+                            <p class="checkbox-inline">
+                                <input name="tag" type="checkbox" id="check2" value="HIIT">
+                                <label class="check2">HIIT</label>
+                            </p>&nbsp;
+
+                            <p class="checkbox-inline">
+                                <input name="tag" type="checkbox" id="check3" value="Pilates">
+                                <label class="check3">Pilates</label>
+                            </p>&nbsp;
+
+                            <p class="checkbox-inline">
+                                <input name="tag" type="checkbox" id="check4" value="Weights">
+                                <label class="check4">Weights</label>
+                            </p>&nbsp;
+                        </p>
+                       
+                    </div>
+
+                    <div> 
+                        <label class ="labelTag">Description</label>
+                        <textarea name="content" class="form-control" id="contentId" cols="20" rows="4" placeholder="Description for Post"></textarea> 
+                    </div>
+
+                <br/>
+
+                <div>   
+                    <input id="addNewPostButton" name="submit" type="button" class="btn AllButton" value="Submit" data-toggle="button" aria-pressed="false" > <!--autocomplete="off"-->
+                </div>
+
+                <br/>
+                <br/>
+
+                <hr>
+
+                <br/>
+                <br/>
+
+            </form>
+               
+        {{else}}
+        
+           <h3 class="popUp">Are you wanting to make posts of your own or leave a like, comment or maybe report a post? We would suggest you to register or login to our website! </h3> 
+        
+        {{/if}}
+
+        <br/>
+
+        <hr>
+
+        </div>
+
+        <div class="row" style="margin-left: 30px">
+
+                {{#each postArr}}
+
+                    <div class="media post-part">
+                            <a href='http://localhost:3000/posts/postInfo/{{this._id}}'>
+                                <img class="media-object user-Pic" src={{this.photoArr.[0]}} alt="defaultAlt" />
+                            </a>
+                            
+                        <div>
+                            <h4 class="media-heading postTopic"><a class="jumpToPost" id={{this._id}} href="#">{{this.topic}}</a></h4>
+                            <div> <p class="AllContent">{{this.content}}</p> </div>
+                        </div>
+                   </div>
+
+                {{else}}
+                        <div>
+                            <h1 class="noPost">No Posts yet</h1>
+                        </div>
+                {{/each}}
+            
+        </div>
+    </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script type="text/javascript">
+
+    var getDataforNewPost = document.getElementById('static-form');
+
+    if(getDataforNewPost)
+    {
+        var submittedInfo = new FormData(getDataforNewPost);
+    }
+    
+    $('#addNewPostButton').click(function () 
+    {
+        var httpReq = new XMLHttpRequest();
+        var tagArr = [];
+
+        $('input[type="checkbox"]:checked').each(function (index) 
+        {
+            tagArr[index] = $(this).val();
+        })
+
+        let JSONData = JSON.stringify(tagArr);
+
+        submittedInfo.set('tagArr', JSONData);
+        submittedInfo.set("topic", $('#topicId').val());
+        submittedInfo.set("content", $('#contentId').val());
+        submittedInfo.delete('tag');
+        submittedInfo.delete('photoArr');
+
+        httpReq.open('post', 'http://localhost:3000/homePage/createPost');
+        httpReq.send(submittedInfo);
+
+        httpReq.onload = function () 
+        {
+            console.log(httpReq.responseText);
+            var Timeout = setTimeout(function () { window.location.reload(); }, 500);
+        }
+    })
+
+    $('.jumpToPost').click(function () 
+    {
+        let urlLink = `http://localhost:3000/posts/postInfo/${$(this).attr("id")}`;
+        let thisID = $(this).attr("id");
+        let selectorID = `#${thisID}`
+
+        $(selectorID).attr('href', urlLink);
+    })
+    
+</script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<body>
+    <div class="container">
+
+        <div class="row">
+            {{#if postInfo}}
+
+            <div class="col-sm-4">
+                <div class="row">
+                    <div class="post-imgs col-sm-9">
+                        {{#each postInfo.photoArr}}
+                        <img class="PostImg" src={{this}} alt="defaultAlt" />
+                        <br/>
+                        <br/>
+                        <br/>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <br/>
+                <div class="panel panel-danger">
+                    <div class="panel-body">
+                        <span class="PostTopic" id={{postInfo._id}}>{{postInfo.nickname}} - {{postInfo.topic}}</span>
+                        <span class="post-glyphicon">
+                            {{#if userLogin}}
+                                <span id="likeCountId" class="glyphicon glyphicon-thumbs-up" aria-hidden="true">{{postInfo.likeCount.length}}</span>
+                                <p>Like</p>
+                                <span id="dislikeCountId" class="glyphicon glyphicon-thumbs-down" aria-hidden="true">{{postInfo.dislikeCount.length}}</span>
+                                <p>Dislike</p>
+                            {{else}}
+                                <span id="likeCountN" class="glyphicon glyphicon-thumbs-up"
+                                      aria-hidden="true">{{postInfo.likeCount.length}}</span>
+                                <span id="dislikeCountN" class="glyphicon glyphicon-thumbs-down"
+                                      aria-hidden="true">{{postInfo.dislikeCount.length}}</span>
+                            {{/if}}
+                        </span>
+                    </div>
+                    <div class="panel-footer">
+                        {{postInfo.content}}
+                        <br />
+                        <br />
+                    </div>
+
+                    {{#if commentsInfo}}
+                    <ul class="list-group">
+                    {{#each commentsInfo}}
+
+                        <li class="list-group-item">
+                            <h6><span class="commentUser">{{this.userNickname}} - </span><span class="post-time">{{this.date}}</span></h6>
+                            <p>{{this.content}}</p>
+                                <div class="commentDelete">
+                                    <input class="btn btn-default commentDeleteButton" type="button" id={{this._id}} name={{this.userId}} value="Delete">
+                                </div>
+                        </li>
+
+                    {{/each}}
+                    </ul>
+                    {{else}}
+                    <ul class="list-group">
+                        <li class="list-group-item">No Comments</li>
+                        <p>Click the Button Below to make the first comment!</p>
+                    </ul>
+                    {{/if}}
+                </div>
+
+
+                    {{#if userLogin}}
+                        <div id="addNewComment">
+                    <button type="button" class="btn btn-default addCommentButton" data-toggle="modal" data-target="#exampleModal"
+                            data-whatever="@getbootstrap" id={{userLogin._id}}>Add comment</button>&nbsp;&nbsp;
+                    <a id="ReportThis" class="btn AllButton" href="">Report this Post</a>
+
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                </div>
+
+                                <div class="modal-body">
+
+                                    <form id="bbb" method="post" action="http://localhost:3000/posts/addComment">
+                                        <div class="form-group">
+                                            <input hidden="hidden" name="postId" value={{postInfo._id}}>
+                                            <label for="message-text" class="control-label">------------------------Comment Here-------------------------</label>
+                                            <textarea name="commentContent" class="form-control" rows="2" id="message-text" placeholder="Comment for this Post">Looks Good!</textarea>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Back</button>
+                                            <button id="addComment" type="submit" class="btn AllButton">Add</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+
+                <div class = "infoDateViews">
+                    <div class="viewCount">
+                    <p>Views Count - {{postInfo.viewCount}}</p>
+                </div>
+
+                <h4>
+                    <div class="post-time">Date Posted - {{postInfo.date}}</div>
+                </h4>
+
+                </div>
+
+                </div>
+                    {{/if}}
+                <div hidden id="likeTip" class="alert alert-danger" role="alert">Alert : Please Login or Register to interact with this post</div>
+
+            </div>
+            {{/if}}
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        var ID = $('.PostTopic').attr('id');
+
+        $('#ReportThis').click(function ()
+        {
+            var url = `http://localhost:3000/reports/form?id=${ID}`;
+            $(this).attr('href', url);
+        })
+
+        $('#likeCountN, #dislikeCountN').click(function ()
+        {
+            $('#likeTip').show();
+            let timeOut = setTimeout(function () 
+            {
+                $('#likeTip').hide();
+            }, 2500)
+        })
+
+        $('#likeCountId').click(function ()
+        {
+            $.get("http://localhost:3000/posts/like", { postId: ID }, function (response) 
+            {
+                $('#likeCountId').text(response.likeCount.length);
+            })
+        })
+
+        $('#dislikeCountId').click(function ()
+        {
+            $.get("http://localhost:3000/posts/dislike", {postId: ID}, function (response)
+            {
+                $('#dislikeCountId').text(response.dislikeCount.length);
+            })
+        })
+
+        let currentUser = $('.addCommentButton').attr('id');
+
+
+        $('.commentDeleteButton').each(function ()
+        {
+
+            if($(this).attr('name') == currentUser)
+            {
+                $(this).show();
+            }
+            else
+            {
+                $(this).hide();
+            }
+        })
+
+        let delBtns = document.getElementsByClassName('commentDeleteButton');
+
+        for(let i = 0; i < delBtns.length; i++)
+        {
+            delBtns[i].onclick = function ()
+            {
+                var httpReq = new XMLHttpRequest();
+                httpReq.open('post', 'http://localhost:3000/posts/deleteComment');
+                let thisCommentId = this.id;
+                let thisPostId =  $('.PostTopic').attr('id');
+
+                httpReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+
+                httpReq.send('commentId=' + thisCommentId + '&postId=' + thisPostId);
+
+                httpReq.onload = function ()
+                {
+                    var Timeout = setTimeout(function ()
+                    {
+                        window.location.reload();
+                    }, 150);
+                }
+            }
+        }
+    </script>
+</body>
